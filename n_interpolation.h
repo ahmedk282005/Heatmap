@@ -28,9 +28,10 @@ int nearest_neighbor(char *datafile, int xscaling, int yscaling)
     printf("%f, %f, %f\n", ymin, ymax, ystep);
 
 
-    // Declare the 'scale' of the input data
-    int xlength = ((int)((xmax - xmin) + 1) / xstep);
-    int ylength = ((int)((ymax - ymin) + 1) / ystep);
+    // Declare the 'scale' of the input data: number of sample points per axis,
+    // e.g. 0..150 in steps of 0.5 -> 301 points (+ 0.5 rounds away float error)
+    int xlength = (int)((xmax - xmin) / xstep + 0.5) + 1;
+    int ylength = (int)((ymax - ymin) / ystep + 0.5) + 1;
 
     // Allocate memory dynamically for total input data (for a 2D array {inputData[i][j] = inputData[xlength][ylength]})
     /* float* inputdata = (float*)malloc(xlength * ylength * sizeof(float)); */

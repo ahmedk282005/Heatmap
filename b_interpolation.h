@@ -25,9 +25,10 @@ int bilinear_interpolation(char *datafile, int xscaling, int yscaling){
     printf("%f, %f, %f\n", ymin, ymax, ystep);
 
 
-    // Declare xlength and ylength
-    int xlength = ((int)((xmax - xmin) + 1) / xstep);
-    int ylength = ((int)((ymax - ymin) + 1) / ystep);
+    // Declare xlength and ylength: number of sample points per axis,
+    // e.g. 0..150 in steps of 0.5 -> 301 points (+ 0.5 rounds away float error)
+    int xlength = (int)((xmax - xmin) / xstep + 0.5) + 1;
+    int ylength = (int)((ymax - ymin) / ystep + 0.5) + 1;
 
     // Allocate memory for data
     float* data = (float*)malloc(xlength * ylength * sizeof(float));
