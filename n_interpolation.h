@@ -23,10 +23,6 @@ int nearest_neighbor(char *datafile, int xscaling, int yscaling)
     float xmin, xmax, xstep, ymin, ymax, ystep;
     fscanf(file, "%f, %f, %f", &xmin, &xmax, &xstep);
     fscanf(file, "%f, %f, %f", &ymin, &ymax, &ystep);
-    // Test
-    printf("%f, %f, %f\n", xmin, xmax, xstep);
-    printf("%f, %f, %f\n", ymin, ymax, ystep);
-
 
     // Declare the 'scale' of the input data: number of sample points per axis,
     // e.g. 0..150 in steps of 0.5 -> 301 points (+ 0.5 rounds away float error)
