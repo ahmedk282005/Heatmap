@@ -26,7 +26,9 @@ make
 |---|---|
 | `datafile` | CSV file with one measurement per line: `x,y,z` |
 | `n` / `b` | interpolation: nearest neighbour or bilinear |
-| `width`, `height` | size of the output image in pixels |
+| `width`, `height` | size of the output image in pixels (any size, e.g. `600 400`) |
+
+In the image, x runs from left to right and y from top to bottom.
 
 Example:
 
