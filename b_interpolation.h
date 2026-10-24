@@ -63,8 +63,10 @@ int bilinear_interpolation(char *datafile, int xscaling, int yscaling){
             float y_frac = y - y1;
 
             // Interpolate in x direction
-            float height_x1 = data[x1 + y1 * xlength] * (1 - x_frac) + data[x2 + y1 * xlength] * x_frac;
-            float height_x2 = data[x1 + y2 * xlength] * (1 - x_frac) + data[x2 + y2 * xlength] * x_frac;
+            // The file lists x in the outer loop and y in the inner one, so the
+            // sample at (x, y) is at index x * ylength + y.
+            float height_x1 = data[x1 * ylength + y1] * (1 - x_frac) + data[x2 * ylength + y1] * x_frac;
+            float height_x2 = data[x1 * ylength + y2] * (1 - x_frac) + data[x2 * ylength + y2] * x_frac;
 
             // Interpolate in y direction
             float height = height_x1 * (1 - y_frac) + height_x2 * y_frac;
