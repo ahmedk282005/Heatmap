@@ -1,0 +1,10 @@
+# Build output (rebuild with `make`)
+heatmap
+solution
+*.o
+
+# Generated images
+*.bmp
+
+# macOS
+.DS_Store
