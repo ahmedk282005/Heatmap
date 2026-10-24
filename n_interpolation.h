@@ -113,15 +113,17 @@ int nearest_neighbor(char *datafile, int xscaling, int yscaling)
     }
 
     // Allocate memory dynamically for the color_map-array (type uint32_t*)
-    uint32_t* color_map = (uint32_t*)calloc(((float)xscaling * (float)yscaling), sizeof(uint32_t));
+    uint32_t* color_map = (uint32_t*)calloc((size_t)xscaling * (size_t)yscaling, sizeof(uint32_t));
 
     // Map the heights to colors
-    for (int i = 0; i < xscaling; i++) 
+    for (int i = 0; i < xscaling; i++)
     {
-        for (int j = 0; j < yscaling; j++) 
+        for (int j = 0; j < yscaling; j++)
         {
         char* color = colorAllocation(interpolatedData[i][j], min_height, max_height); // this uses the function that already assigned the heights to the colors to initialize the variable color
-        color_map[j + i * xscaling] = hex_to_uint32(color); // stores the assigned colors inside the color_map-array using the array translation
+        // The BMP is stored row by row: pixel (column i, row j) sits at j * width + i.
+        // (j + i * xscaling) wrote past the end of the array whenever width > height.
+        color_map[i + j * xscaling] = hex_to_uint32(color);
         }
     }
 
